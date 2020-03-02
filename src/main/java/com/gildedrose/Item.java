@@ -47,43 +47,37 @@ public class Item {
     }
 
     private void updateAgedBrice(){
+        this.sell_in --;
         if (this.getQuality() < 50) {
             this.quality ++;
-        }
-        this.sell_in --;
-        if (this.getSell_in() < 0 && this.getQuality() < 50) {
-            this.quality ++;
+            if(this.getSell_in() < 0) this.quality ++;
         }
     }
 
     private void updateBackstagePasses(){
+        this.sell_in --;
+        if(this.getSell_in() < 0){
+            this.quality = 0;
+            return ;
+        }
         if (this.getQuality() < 50) {
             this.quality ++;
-            if (this.getSell_in() < 11) {
-                if (this.getQuality() < 50) {
-                    this.quality ++;
-                }
+            if (this.getSell_in() < 10) {
+                this.quality ++;
             }
-
-            if (this.getSell_in() < 6) {
-                if (this.getQuality() < 50) {
-                    this.quality ++;
-                }
+            if (this.getSell_in() < 5) {
+                this.quality ++;
             }
-        }
-        this.sell_in --;
-        if (this.getSell_in() < 0) {
-            this.quality = 0;
+            this.quality = Math.min(this.quality,50);
         }
     }
 
     private void updateOthers(){
+        this.sell_in --;
         if (this.getQuality() > 0) {
             this.quality --;
-        }
-        this.sell_in --;
-        if (this.getSell_in() < 0 && this.getQuality() > 0) {
-            this.quality --;
+            if(this.getSell_in() < 0) this.quality --;
+            this.quality = Math.max(0,this.quality);
         }
     }
 
