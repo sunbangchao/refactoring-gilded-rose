@@ -3,7 +3,7 @@ package com.gildedrose;
 public class Item {
 
     private static final String AGED_BRIE = "Aged Brie";
-    private static final String BACKSTAGE_PASSES = "Backstage passes";
+    private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     private String name;
@@ -30,14 +30,6 @@ public class Item {
         return quality;
     }
 
-    public void setSell_in(int sell_in) {
-        this.sell_in = sell_in;
-    }
-
-    public void setQuality(int quality) {
-        this.quality = quality;
-    }
-
     public void update(){
         switch (this.getName()){
             case AGED_BRIE:
@@ -56,42 +48,42 @@ public class Item {
 
     private void updateAgedBrice(){
         if (this.getQuality() < 50) {
-            this.setQuality(this.getQuality() + 1);
+            this.quality ++;
         }
-        this.setSell_in(this.getSell_in() - 1);
+        this.sell_in --;
         if (this.getSell_in() < 0 && this.getQuality() < 50) {
-            this.setQuality(this.getQuality() + 1);
+            this.quality ++;
         }
     }
 
     private void updateBackstagePasses(){
         if (this.getQuality() < 50) {
-            this.setQuality(this.getQuality() + 1);
+            this.quality ++;
             if (this.getSell_in() < 11) {
                 if (this.getQuality() < 50) {
-                    this.setQuality(this.getQuality() + 1);
+                    this.quality ++;
                 }
             }
 
             if (this.getSell_in() < 6) {
                 if (this.getQuality() < 50) {
-                    this.setQuality(this.getQuality() + 1);
+                    this.quality ++;
                 }
             }
         }
-        this.setSell_in(this.getSell_in() - 1);
+        this.sell_in --;
         if (this.getSell_in() < 0) {
-            this.setQuality(this.getQuality() - this.getQuality());
+            this.quality = 0;
         }
     }
 
     private void updateOthers(){
         if (this.getQuality() > 0) {
-            this.setQuality(this.getQuality() - 1);
+            this.quality --;
         }
-        this.setSell_in(this.getSell_in() - 1);
+        this.sell_in --;
         if (this.getSell_in() < 0 && this.getQuality() > 0) {
-            this.setQuality(this.getQuality() - 1);
+            this.quality --;
         }
     }
 
